@@ -66,11 +66,12 @@ def verTabla(Prod):
         user_input = input("Presione 'q' para regresar al menú principal: ")
         if user_input.lower() == "q":
             verMenu()
+            os.system("cls")
             break
 
 
 def verMenu():
-    clear_screen()
+    os.system("cls")
     print("1. Ver Tabla")
     print("2. Añadir Inventario")
     print("3. Nuevo Producto")
