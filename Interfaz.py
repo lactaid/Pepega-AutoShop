@@ -60,18 +60,22 @@ def verTabla(Prod):
 
     results = mycursor.fetchall()
     headers = [desc[0] for desc in mycursor.description]
-    print(tabulate(results, headers=headers, tablefmt="fancy_grid"))
+    print(tabulate(results, headers=headers, tablefmt="psql"))
 
     while True:
         user_input = input("Presione 'q' para regresar al menú principal: ")
         if user_input.lower() == "q":
-            verMenu()
             os.system("cls")
+            os.system("cls")
+            verMenu()
             break
 
 
 def verMenu():
     os.system("cls")
+    clear_screen()
+    clear_screen()
+    clear_screen()
     print("1. Ver Tabla")
     print("2. Añadir Inventario")
     print("3. Nuevo Producto")
@@ -113,6 +117,7 @@ def handle_menu_choice(choice):
         os.system("cls")
         exit()
     else:
+        verMenu()
         print("Opción inválida. Por favor, ingrese una opción válida.")
 
 
