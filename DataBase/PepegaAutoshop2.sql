@@ -70,6 +70,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pepega_autoshop`.`Departamento` (
   `idDepartamento` INT NOT NULL AUTO_INCREMENT,
+  `NombreDepartamento` VARCHAR(70) NULL,
   `idSupervisor` VARCHAR(20) NULL,
   PRIMARY KEY (`idDepartamento`),
   INDEX `SupervisorDepa_idx` (`idSupervisor` ASC) VISIBLE,

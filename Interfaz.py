@@ -2,59 +2,84 @@ import os
 import subprocess
 from tabulate import tabulate
 import mysql.connector
+import pwinput
 # -*- coding: utf-8 -*-
 
 
-def nuevoProducto(id, nombre, clase, inventario, precio):
-    mycursor.execute("INSERT INTO producto VALUES (%s,%s,%s,%s,%s)",
-                     (id, nombre, clase, inventario, precio))
+def nuevoProducto():
+    nombre = input("Ingrese el nombre del nuevo producto: ")
+    clase = input("Ingrese la clase del nuevo producto: ")
+    inventario = input("Ingrese el inventario del nuevo producto: ")
+    precio = input("Ingrese el precio del nuevo producto: ")
+
+    mycursor.execute("INSERT INTO producto VALUES (%s,%s,%s,%s)",
+                     (nombre, clase, inventario, precio))
     db.commit()
+    print("Producto agregado exitosamente.")
+
+    while True:
+        user_input = input("Presione 'q' para regresar al menú principal: ")
+        if user_input.lower() == "q":
+            clear_screen()
+            verMenu()
+            break
 
 
 def addInventario():
-    # Obtener los nombres de los productos disponibles (solo el campo NombreProducto de la tabla Refacciones)
-    mycursor.execute("SELECT NombreProducto FROM Refacciones")
+    # Obtener los productos disponibles (ID y Nombre)
+    mycursor.execute(
+        "SELECT idProducto, NombreProducto, inventario FROM Refacciones")
     results = mycursor.fetchall()
-    product_names = [row[0] for row in results]
+    products = [(row[0], row[1], row[2]) for row in results]
 
-    # Mostrar los nombres de los productos disponibles al usuario
+    # Mostrar los productos disponibles al usuario
     clear_screen()
     print("Productos disponibles:")
-    for i, name in enumerate(product_names, start=1):
-        print(f"{i}. {name}")
+    for i, product in enumerate(products, start=1):
+        print(f"{i}. {product[1]} | Stock: {product[2]} ")
 
     # Solicitar al usuario que seleccione el producto
     while True:
         try:
             choice = int(input("Seleccione el número del producto: "))
-            if 1 <= choice <= len(product_names):
+            if 1 <= choice <= len(products):
                 break
             else:
                 print("Opción inválida. Por favor, ingrese un número válido.")
         except ValueError:
             print("Opción inválida. Por favor, ingrese un número válido.")
 
-    selected_product = product_names[choice - 1]
+    selected_product = products[choice - 1]
 
+    clear_screen()
     # Resto de la lógica para añadir inventario
-    query = "SELECT inventario FROM Refacciones WHERE NombreProducto = %s"
-    mycursor.execute(query, (selected_product,))
+    query = "SELECT inventario FROM Refacciones WHERE idProducto = %s"
+    mycursor.execute(query, (selected_product[0],))
     result = mycursor.fetchone()
     print("Inventario Viejo: " + str(result[0]))
     suma = int(input("Ingrese la cantidad a añadir al inventario: "))
     new_inventory = int(result[0]) + suma
+    db.commit()
     mycursor.execute(
-        "UPDATE Refacciones SET inventario = %s WHERE NombreProducto = %s", (new_inventory, selected_product))
+        "UPDATE Refacciones SET inventario = %s WHERE idProducto = %s", (new_inventory, selected_product[0]))
     db.commit()
 
     # Leer los resultados de la actualización del inventario
-    mycursor.execute("SELECT inventario FROM Refacciones WHERE NombreProducto = %s", (selected_product,))
+    mycursor.execute(
+        "SELECT inventario FROM Refacciones WHERE idProducto = %s", (selected_product[0],))
     result = mycursor.fetchone()
 
     if result:
         print("Inventario actualizado: " + str(result[0]))
     else:
         print("No se pudo obtener el inventario actualizado.")
+
+    while True:
+        user_input = input("Presione 'q' para regresar al menú principal: ")
+        if user_input.lower() == "q":
+            clear_screen()
+            verMenu()
+            break
 
 
 def verTabla():
@@ -80,9 +105,10 @@ def verTabla():
             print("Opción inválida. Por favor, ingrese un número válido.")
 
     selected_table = table_names[choice - 1]
-    display_table(selected_table)
+    tablaSeleccionada(selected_table)
 
-def display_table(table_name):
+
+def tablaSeleccionada(table_name):
     clear_screen()
     query = "SELECT * FROM " + table_name
     mycursor.execute(query)
@@ -97,6 +123,7 @@ def display_table(table_name):
             clear_screen()
             verMenu()
             break
+
 
 def regresarLogin():
     global db, mycursor
@@ -138,14 +165,8 @@ def handle_menu_choice(choice):
         addInventario()
 
     elif choice == "3":
-        # Lógica para nuevo producto
-        id = input("Ingrese el ID del nuevo producto: ")
-        nombre = input("Ingrese el nombre del nuevo producto: ")
-        clase = input("Ingrese la clase del nuevo producto: ")
-        inventario = input("Ingrese el inventario del nuevo producto: ")
-        precio = input("Ingrese el precio del nuevo producto: ")
-        nuevoProducto(id, nombre, clase, inventario, precio)
-        print("Producto agregado exitosamente.")
+        # Nuevo producto
+        nuevoProducto()
 
     elif choice == "4":
         # Salir del programa y regresar al inicio de sesión
@@ -154,7 +175,6 @@ def handle_menu_choice(choice):
     else:
         verMenu()
         print("Opción inválida. Por favor, ingrese una opción válida.")
-
 
 
 def login():
@@ -174,7 +194,7 @@ def login():
     ⠁⠁⠁⠉⠻⢿⣿⣿⣷⣦⣬⣍⣓⡒⠒⣒⣂⣠⡬⠽⠓⠂⠁⠁⠁⠁⠁⠁
     """)
 
-    sqlPassword = input("Enter username:")
+    sqlPassword = pwinput.pwinput()
 
     db = mysql.connector.connect(
         host='localhost',
@@ -185,7 +205,7 @@ def login():
 
     return db
 
-    
+
 try:
     db = login()
 except:
