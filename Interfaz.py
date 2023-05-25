@@ -3,6 +3,9 @@ import subprocess
 from tabulate import tabulate
 import mysql.connector
 import pwinput
+import textwrap
+from colorama import init, Fore
+# auto-py-to-exe para convertirlo a exe
 # -*- coding: utf-8 -*-
 
 
@@ -115,7 +118,20 @@ def tablaSeleccionada(table_name):
 
     results = mycursor.fetchall()
     headers = [desc[0] for desc in mycursor.description]
-    print(tabulate(results, headers=headers, tablefmt="fancy_grid"))
+
+    # Ajustar el tamaño de la descripción para que se ajuste al espacio en la tabla
+    wrapped_results = []
+    for row in results:
+        wrapped_row = []
+        for item in row:
+            if isinstance(item, str) and len(item) > 20:
+                wrapped_item = textwrap.fill(item, width=20)
+                wrapped_row.append(wrapped_item)
+            else:
+                wrapped_row.append(item)
+        wrapped_results.append(wrapped_row)
+
+    print(tabulate(wrapped_results, headers=headers, tablefmt="fancy_grid"))
 
     while True:
         user_input = input("Presione 'q' para regresar al menú principal: ")
@@ -179,8 +195,7 @@ def handle_menu_choice(choice):
 
 def login():
     clear_screen()
-    # -*- coding: utf-8 -*-
-    print("""
+    print(Fore.GREEN + r"""
     ⠁⠁⠁⠁⠁⠁⠐⢶⣶⣶⣶⣤⣤⡀⠁⠁⣠⣀⣀⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁
     ⠁⠁⠁⠁⠁⠁⠁⠁⠙⢿⣯⣠⣶⣦⣤⣤⣌⣛⠻⢇⣠⣤⣤⠁⠁⠁⠁⠁⠁⠁
     ⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠻⣿⣿⣿⡟⢉⡤⢤⣤⣤⡍⠛⢡⢖⣥⣶⣦⣀⠁⠁
@@ -192,7 +207,7 @@ def login():
     ⠘⣿⣿⣿⣿⣆⠻⣄⠁⣀⡀⠉⠙⠒⠂⠉⠍⠉⠉⠉⠉⣩⣍⣁⣂⡈⠠⠂⠁⠁
     ⠁⠘⢿⣿⣿⣿⣦⡉⠳⢬⣛⠷⢦⡄⠁⠁⠁⠁⠁⣀⣼⣿⣿⠿⠛⠋⠁⠁⠁⠁
     ⠁⠁⠁⠉⠻⢿⣿⣿⣷⣦⣬⣍⣓⡒⠒⣒⣂⣠⡬⠽⠓⠂⠁⠁⠁⠁⠁⠁
-    """)
+    """ + Fore.RESET)
 
     sqlPassword = pwinput.pwinput()
 
