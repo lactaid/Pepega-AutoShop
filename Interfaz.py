@@ -11,9 +11,9 @@ def nuevoProducto(id, nombre, clase, inventario, precio):
     db.commit()
 
 
-def addInventario(Prod, suma, idProd):
-    # Obtener los nombres de los productos disponibles
-    mycursor.execute("SELECT nombre FROM " + Prod)
+def addInventario():
+    # Obtener los nombres de los productos disponibles (solo el campo NombreProducto de la tabla Refacciones)
+    mycursor.execute("SELECT NombreProducto FROM Refacciones")
     results = mycursor.fetchall()
     product_names = [row[0] for row in results]
 
@@ -37,21 +37,24 @@ def addInventario(Prod, suma, idProd):
     selected_product = product_names[choice - 1]
 
     # Resto de la lógica para añadir inventario
-    query = "SELECT inventario FROM " + Prod
-    mycursor.execute(query)
+    query = "SELECT inventario FROM Refacciones WHERE NombreProducto = %s"
+    mycursor.execute(query, (selected_product,))
     result = mycursor.fetchone()
-    db.commit()
     print("Inventario Viejo: " + str(result[0]))
+    suma = int(input("Ingrese la cantidad a añadir al inventario: "))
     new_inventory = int(result[0]) + suma
     mycursor.execute(
-        "UPDATE producto SET inventario = %s WHERE nombre = %s", (new_inventory, selected_product))
+        "UPDATE Refacciones SET inventario = %s WHERE NombreProducto = %s", (new_inventory, selected_product))
     db.commit()
 
-    query = "SELECT inventario FROM " + Prod
-    mycursor.execute(query)
+    # Leer los resultados de la actualización del inventario
+    mycursor.execute("SELECT inventario FROM Refacciones WHERE NombreProducto = %s", (selected_product,))
     result = mycursor.fetchone()
 
-    print("Inventario actualizado: " + str(result[0]))
+    if result:
+        print("Inventario actualizado: " + str(result[0]))
+    else:
+        print("No se pudo obtener el inventario actualizado.")
 
 
 def verTabla():
@@ -131,11 +134,8 @@ def handle_menu_choice(choice):
         verTabla()
 
     elif choice == "2":
-        # Lógica para añadir inventario
-        prod = input("Ingrese el nombre del producto: ")
-        suma = int(input("Ingrese la cantidad a añadir al inventario: "))
-        prodID = input("Ingrese el ID del producto: ")
-        addInventario(prod, suma, prodID)
+        # Añadir inventario
+        addInventario()
 
     elif choice == "3":
         # Lógica para nuevo producto
