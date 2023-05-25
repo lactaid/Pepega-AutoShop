@@ -2,6 +2,7 @@ import os
 import subprocess
 from tabulate import tabulate
 import mysql.connector
+# -*- coding: utf-8 -*-
 
 
 def nuevoProducto(id, nombre, clase, inventario, precio):
@@ -60,7 +61,7 @@ def verTabla(Prod):
 
     results = mycursor.fetchall()
     headers = [desc[0] for desc in mycursor.description]
-    print(tabulate(results, headers=headers, tablefmt="psql"))
+    print(tabulate(results, headers=headers, tablefmt="fancy_grid"))
 
     while True:
         user_input = input("Presione 'q' para regresar al menú principal: ")
@@ -126,18 +127,46 @@ def handle_menu_choice(choice):
 # prodID='p001'
 # addInventario(prod, 5, prodID)
 # verTabla(prod)
-clear_screen()
-sqlPassword = input("Enter username:")
 
-db = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    passwd=sqlPassword,
-    database='pepega_autoshop'
-)
+def login():
+    clear_screen()
+    # -*- coding: utf-8 -*-
+    print("""
+    ⠁⠁⠁⠁⠁⠁⠐⢶⣶⣶⣶⣤⣤⡀⠁⠁⣠⣀⣀⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁
+    ⠁⠁⠁⠁⠁⠁⠁⠁⠙⢿⣯⣠⣶⣦⣤⣤⣌⣛⠻⢇⣠⣤⣤⠁⠁⠁⠁⠁⠁⠁
+    ⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠻⣿⣿⣿⡟⢉⡤⢤⣤⣤⡍⠛⢡⢖⣥⣶⣦⣀⠁⠁
+    ⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⣠⣿⣿⣿⡏⣭⣶⣿⣿⠟⢿⣦⡡⣿⣿⡇⠁⡙⣷⡀
+    ⠁⠁⠁⠁⠁⠁⠁⣀⣴⣿⣿⣿⣿⣿⣿⡞⣿⣿⡟⢀⡀⣿⣿⢻⣿⣿⣀⣁⣿⠏
+    ⠁⠁⠁⢀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣟⢰⢻⣿⣇⣈⣴⣿⠟⢨⣛⠛⠛⠉⠁⠁
+    ⠁⣠⣶⣿⣿⡟⢋⠤⣤⠘⢿⣿⣧⡙⠻⠌⠒⠙⠛⢛⣫⣥⣿⣦⡈⠉⣡⣴⣾⠇
+    ⢰⣿⣿⣿⣿⠁⡇⠁⠙⠷⣤⡙⠻⢿⣿⣶⣶⣶⣿⣿⣿⣿⣿⣿⠿⠟⠋⠁⠁
+    ⠘⣿⣿⣿⣿⣆⠻⣄⠁⣀⡀⠉⠙⠒⠂⠉⠍⠉⠉⠉⠉⣩⣍⣁⣂⡈⠠⠂⠁⠁
+    ⠁⠘⢿⣿⣿⣿⣦⡉⠳⢬⣛⠷⢦⡄⠁⠁⠁⠁⠁⣀⣼⣿⣿⠿⠛⠋⠁⠁⠁⠁
+    ⠁⠁⠁⠉⠻⢿⣿⣿⣷⣦⣬⣍⣓⡒⠒⣒⣂⣠⡬⠽⠓⠂⠁⠁⠁⠁⠁⠁
+    """)
 
-mycursor = db.cursor()
+    sqlPassword = input("Enter username:")
 
+    db = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        passwd=sqlPassword,
+        database='pepega_autoshop'
+    )
 
-verMenu()
+    return db
+
+    
+
+try:
+    db = login()
+except:
+    try:
+        db = login()
+    except:
+        print("Error de conexión. Por favor, intente de nuevo.")
+else:
+    mycursor = db.cursor()
+    verMenu()
+
 # input("Presione Enter para continuar...")
