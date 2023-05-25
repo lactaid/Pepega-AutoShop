@@ -54,9 +54,34 @@ def addInventario(Prod, suma, idProd):
     print("Inventario actualizado: " + str(result[0]))
 
 
-def verTabla(Prod):
+def verTabla():
     clear_screen()
-    query = "SELECT * FROM " + Prod
+    mycursor.execute("SHOW TABLES")
+    results = mycursor.fetchall()
+    table_names = [row[0] for row in results]
+
+    # Mostrar las tablas disponibles al usuario
+    print("Tablas disponibles:")
+    for i, name in enumerate(table_names, start=1):
+        print(f"{i}. {name}")
+
+    # Solicitar al usuario que seleccione la tabla
+    while True:
+        try:
+            choice = int(input("Seleccione el número de la tabla: "))
+            if 1 <= choice <= len(table_names):
+                break
+            else:
+                print("Opción inválida. Por favor, ingrese un número válido.")
+        except ValueError:
+            print("Opción inválida. Por favor, ingrese un número válido.")
+
+    selected_table = table_names[choice - 1]
+    display_table(selected_table)
+
+def display_table(table_name):
+    clear_screen()
+    query = "SELECT * FROM " + table_name
     mycursor.execute(query)
 
     results = mycursor.fetchall()
@@ -66,10 +91,20 @@ def verTabla(Prod):
     while True:
         user_input = input("Presione 'q' para regresar al menú principal: ")
         if user_input.lower() == "q":
-            os.system("cls")
-            os.system("cls")
+            clear_screen()
             verMenu()
             break
+
+def regresarLogin():
+    global db, mycursor
+    db.close()  # Cerrar la conexión a la base de datos actual
+    try:
+        db = login()  # Volver a iniciar sesión
+        mycursor = db.cursor()
+        verMenu()  # Mostrar el menú principal
+    except:
+        print("Error de conexión. Por favor, reinicie e intente de nuevo.")
+        exit()
 
 
 def verMenu():
@@ -93,8 +128,7 @@ def handle_menu_choice(choice):
     if choice == "1":
         # Ver tabla
         os.system("cls")
-        prod = input("Ingrese el nombre de la tabla: ")
-        verTabla(prod)
+        verTabla()
 
     elif choice == "2":
         # Lógica para añadir inventario
@@ -114,19 +148,14 @@ def handle_menu_choice(choice):
         print("Producto agregado exitosamente.")
 
     elif choice == "4":
-        # Salir del programa
+        # Salir del programa y regresar al inicio de sesión
         os.system("cls")
-        exit()
+        regresarLogin()
     else:
         verMenu()
         print("Opción inválida. Por favor, ingrese una opción válida.")
 
 
-# mycursor.execute("SELECT * FROM producto")
-# prod = 'producto'
-# prodID='p001'
-# addInventario(prod, 5, prodID)
-# verTabla(prod)
 
 def login():
     clear_screen()
@@ -157,16 +186,11 @@ def login():
     return db
 
     
-
 try:
     db = login()
 except:
-    try:
-        db = login()
-    except:
-        print("Error de conexión. Por favor, intente de nuevo.")
+    print("Error de conexión. Por favor, reinicie e intente de nuevo.")
+    exit()
 else:
     mycursor = db.cursor()
     verMenu()
-
-# input("Presione Enter para continuar...")
