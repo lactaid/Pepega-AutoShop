@@ -81,3 +81,32 @@ UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Desarrollo Organiz
 UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Asuntos Legales' WHERE (idDepartamento = '23');
 UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Relaciones Públicas' WHERE (idDepartamento = '24');
 UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Servicio de Posventa' WHERE (idDepartamento = '25');
+
+/* Diagnostico */
+INSERT INTO pepega_autoshop.diagnostico (Descripcion) VALUES
+('El motor presenta un ruido extraño y falta de potencia'),
+('Los frenos están desgastados y producen chirridos al frenar'),
+('Las llantas presentan desgaste irregular y falta de alineación'),
+('La transmisión tiene dificultades para cambiar de marcha'),
+('El aceite del motor muestra signos de contaminación'),
+('La batería no retiene carga adecuadamente'),
+('Se presentan fallos eléctricos en diferentes sistemas del vehículo'),
+('El vehículo experimenta fallas intermitentes y pérdida de potencia'),
+('La suspensión está desgastada y produce ruidos al pasar por baches'),
+('Las llantas presentan desgaste excesivo en los bordes'),
+('Se observan fugas en el sistema de escape'),
+('El filtro de aire está obstruido y requiere reemplazo'),
+('La dirección del vehículo es difícil de maniobrar'),
+('Las bujías están desgastadas y no generan chispa adecuada'),
+('El sistema de frenos muestra desgaste en las pastillas y pérdida de eficiencia'),
+('La correa de distribución está desgastada y presenta grietas'),
+('El sistema de climatización no enfría correctamente'),
+('Los amortiguadores presentan fugas y pérdida de efectividad'),
+('El sistema de dirección asistida tiene dificultades al girar'),
+('El sensor de oxígeno muestra señales irregulares'),
+('La suspensión neumática presenta fugas de aire y no se ajusta correctamente'),
+('El filtro de combustible está obstruido y reduce el flujo de combustible'),
+('El sistema de inyección de combustible presenta fallos y consumo excesivo'),
+('La bomba de agua tiene fugas y debe ser reemplazada'),
+('El sistema de dirección hidráulica presenta pérdida de líquido y dificultades al girar');
+

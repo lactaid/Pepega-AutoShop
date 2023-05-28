@@ -5,20 +5,34 @@ import mysql.connector
 import pwinput
 import textwrap
 from colorama import init, Fore
-# auto-py-to-exe para convertirlo a exe
+from pyfiglet import Figlet
+
+# auto-py-to-exe        <-      para convertirlo a exe
 # -*- coding: utf-8 -*-
+
+# Imprime el nombre de la empresa
+
+
+# def render(text):
+#     f = Figlet()
+#     print('\n'*10)
+#     print(f.renderText(text))
+
+# Agrega un nuevo producto a refacciones
 
 
 def nuevoProducto():
+    clear_screen()
     nombre = input("Ingrese el nombre del nuevo producto: ")
     clase = input("Ingrese la clase del nuevo producto: ")
     inventario = input("Ingrese el inventario del nuevo producto: ")
     precio = input("Ingrese el precio del nuevo producto: ")
+    Desc = input("Ingrese una descripcion breve del nuevo producto: ")
 
-    mycursor.execute("INSERT INTO producto VALUES (%s,%s,%s,%s)",
-                     (nombre, clase, inventario, precio))
+    mycursor.execute("INSERT INTO refacciones (NombreProducto, Clase, Inventario, PrecioUnitario, Descripcion) VALUES (%s, %s, %s, %s, %s)",
+                     (nombre, clase, inventario, precio, Desc))
     db.commit()
-    print("Producto agregado exitosamente.")
+    print("Producto agregado exitosamente. Puede consultar la tabla de refacciones para verificarlo.")
 
     while True:
         user_input = input("Presione 'q' para regresar al menú principal: ")
@@ -27,8 +41,11 @@ def nuevoProducto():
             verMenu()
             break
 
+# Agregarle al inventario de un producto existente, ingresar una cantidad negativa para restarle
+
 
 def addInventario():
+    clear_screen()
     # Obtener los productos disponibles (ID y Nombre)
     mycursor.execute(
         "SELECT idProducto, NombreProducto, inventario FROM Refacciones")
@@ -84,6 +101,8 @@ def addInventario():
             verMenu()
             break
 
+# Funcion para visualizar las tablas de la base de datos
+
 
 def verTabla():
     clear_screen()
@@ -109,6 +128,8 @@ def verTabla():
 
     selected_table = table_names[choice - 1]
     tablaSeleccionada(selected_table)
+
+# Imprime la tabla seleccionada
 
 
 def tablaSeleccionada(table_name):
@@ -195,22 +216,10 @@ def handle_menu_choice(choice):
 
 def login():
     clear_screen()
-    print(r"""
-    ⠁⠁⠁⠁⠁⠁⠐⢶⣶⣶⣶⣤⣤⡀⠁⠁⣠⣀⣀⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁
-    ⠁⠁⠁⠁⠁⠁⠁⠁⠙⢿⣯⣠⣶⣦⣤⣤⣌⣛⠻⢇⣠⣤⣤⠁⠁⠁⠁⠁⠁⠁
-    ⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠻⣿⣿⣿⡟⢉⡤⢤⣤⣤⡍⠛⢡⢖⣥⣶⣦⣀⠁⠁
-    ⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⣠⣿⣿⣿⡏⣭⣶⣿⣿⠟⢿⣦⡡⣿⣿⡇⠁⡙⣷⡀
-    ⠁⠁⠁⠁⠁⠁⠁⣀⣴⣿⣿⣿⣿⣿⣿⡞⣿⣿⡟⢀⡀⣿⣿⢻⣿⣿⣀⣁⣿⠏
-    ⠁⠁⠁⢀⣠⣶⣿⣿⣿⣿⣿⣿⣿⣿⣟⢰⢻⣿⣇⣈⣴⣿⠟⢨⣛⠛⠛⠉⠁⠁
-    ⠁⣠⣶⣿⣿⡟⢋⠤⣤⠘⢿⣿⣧⡙⠻⠌⠒⠙⠛⢛⣫⣥⣿⣦⡈⠉⣡⣴⣾⠇
-    ⢰⣿⣿⣿⣿⠁⡇⠁⠙⠷⣤⡙⠻⢿⣿⣶⣶⣶⣿⣿⣿⣿⣿⣿⠿⠟⠋⠁⠁
-    ⠘⣿⣿⣿⣿⣆⠻⣄⠁⣀⡀⠉⠙⠒⠂⠉⠍⠉⠉⠉⠉⣩⣍⣁⣂⡈⠠⠂⠁⠁
-    ⠁⠘⢿⣿⣿⣿⣦⡉⠳⢬⣛⠷⢦⡄⠁⠁⠁⠁⠁⣀⣼⣿⣿⠿⠛⠋⠁⠁⠁⠁
-    ⠁⠁⠁⠉⠻⢿⣿⣿⣷⣦⣬⣍⣓⡒⠒⣒⣂⣠⡬⠽⠓⠂⠁⠁⠁⠁⠁⠁
-    """)
+    print(" - Pepega Autoshop -")
 
     sqlPassword = pwinput.pwinput()
-
+    # Aqui van los parametros del manejador de base de datos
     db = mysql.connector.connect(
         host='localhost',
         user='root',
