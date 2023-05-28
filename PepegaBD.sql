@@ -71,7 +71,7 @@ CREATE TABLE `departamento` (
 
 LOCK TABLES `departamento` WRITE;
 /*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
-INSERT INTO `departamento` VALUES (1,'Ventas',1),(2,'Servicio al Cliente',1),(3,'Recursos Humanos',1),(4,'Finanzas',1),(5,'Almacén',1),(6,'Marketing',5),(7,'Taller de Reparación',5),(8,'Compras',5),(9,'Desarrollo de Productos',5),(10,'Logística',5),(11,'Mantenimiento',10),(12,'Calidad',10),(13,'Ingeniería',10),(14,'Seguridad',10),(15,'Soporte Técnico',10),(16,'Investigación y Desarrollo',15),(17,'Planificación de Producción',15),(18,'Ventas en Línea',15),(19,'Comunicación',15),(20,'Control de Inventario',15),(21,'Planificación Financiera',20),(22,'Desarrollo Organizacional',20),(23,'Asuntos Legales',20),(24,'Relaciones Públicas',20),(25,'Servicio de Posventa',20);
+INSERT INTO `departamento` VALUES (1,'Ventas',1),(2,'Servicio al Cliente',1),(3,'Carrocería y pintura',1),(4,'Finanzas',1),(5,'Almacén',1),(6,'Marketing',5),(7,'Eléctrico',5),(8,'Compras',5),(9,'Alineación y Balanceo, suspensión',5),(10,'Logística',5),(11,'Mecánico',10),(12,'Calidad',10),(13,'Refaccionaria',10),(14,'Seguridad',10),(15,'Soporte Técnico',10),(16,'Investigación y Desarrollo',15),(17,'Planificación de Producción',15),(18,'Ventas en Línea',15),(19,'Comunicación',15),(20,'Control de Inventario',15),(21,'Planificación Financiera',20),(22,'Desarrollo Organizacional',20),(23,'Asuntos Legales',20),(24,'Relaciones Públicas',20),(25,'Servicio de Posventa',20);
 /*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +237,7 @@ CREATE TABLE `refacciones` (
   `Descripcion` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idProducto`),
   KEY `Precio` (`PrecioUnitario`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -421,4 +421,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-28  8:42:58
+-- Dump completed on 2023-05-28  9:34:50
