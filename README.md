@@ -15,4 +15,11 @@
    - El programa usa los parámetros predeterminados para el host y el usuario. En caso de ser necesario, estos se pueden modificar dentro del [código del ejecutable](Interfaz.py).
 
 
-     ![image](https://github.com/lactaid/Pepega-AutoShop/assets/90157449/b0bec96e-0ed9-4233-b669-1bcd265d1ab5)
+     ![image](https://github.com/lactaid/Pepega-AutoShop/assets/90157449/b0bec96e-0ed9-4233-b669-1bcd265d1ab5)     
+4. Dentro del EXE, obtenemos un menu de opciones para interactuar con la base de datos
+
+
+![image](https://github.com/lactaid/Pepega-AutoShop/assets/90157449/76821c2e-036f-4a0f-a1e2-fbec2b74540e)
+
+5. Al acabar cualquier tarea, ingresar q y enter para regresar al menu principal, y presionar 4 en el menu principal para regresar al menu de inicio de sesion.
+
