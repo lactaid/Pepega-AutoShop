@@ -1,0 +1,112 @@
+/*Clientes */
+INSERT INTO pepega_autoshop.cliente VALUES 
+(1,'Juan','Gómez','Pérez','Calle 123','6641234567','GOPJ890101','juan@example.com','12345'),
+(2,'María','López','Sánchez','Avenida 456','6649876543','LOSM901231','maria@example.com','23456'),
+(3,'Pedro','Ramírez','García','Plaza 789','6864561234','RAGP880511','pedro@example.com','34567'),
+(4,'Laura','Fernández','Martínez','Callejón 987','6867894561','FAML830619','laura@example.com','45678'),
+(5,'Carlos','Torres','Rojas','Paseo 654','6643217894','TORC910214','carlos@example.com','56789'),
+(6,'Ana','García','Vargas','Avenida 321','6646549873','GAVA900712','ana@example.com','67890'),
+(7,'Luis','Pérez','Hernández','Calle 654','6869873216','PEHL771225','luis@example.com','78901'),
+(8,'Marta','González','Jiménez','Plaza 987','6643216549','GOJM900609','marta@example.com','89012'),
+(9,'Javier','Sánchez','Gómez','Callejón 321','6866549872','SAGJ891025','javier@example.com','90123'),
+(10,'Sofía','Martínez','Fernández','Paseo 987','6643216549','MAFS880331','sofia@example.com','01234'),
+(11,'Pablo','Gómez','López','Avenida 654','6869873216','GOLP800527','pablo@example.com','12345'),
+(12,'Elena','Rojas','Torres','Calle 987','6643216549','ROTE840708','elena@example.com','23456'),
+(13,'Roberto','Hernández','Pérez','Plaza 654','6869873216','HEPR780804','roberto@example.com','34567'),
+(14,'Julia','Jiménez','González','Callejón 987','6643216549','JIGJ820307','julia@example.com','45678'),
+(15,'Diego','Gómez','Sánchez','Paseo 654','6869873216','GOSD790609','diego@example.com','56789'),
+(16,'Isabel','Fernández','Martínez','Avenida 987','6643216549','FEMI760226','isabel@example.com','67890'),
+(17,'Gabriel','Torres','García','Calle 654','6869873216','TOGG800527','gabriel@example.com','78901'),
+(18,'Lucía','García','Vargas','Plaza 987','6643216549','GAVL811001','lucia@example.com','89012'),
+(19,'Andrés','Pérez','Hernández','Callejón 654','6869873216','PEHA841127','andres@example.com','90123'),
+(20,'Marina','González','Jiménez','Paseo 987','6643216549','GOJM790818','marina@example.com','01234'),
+(21,'Manuel','Sánchez','Gómez','Avenida 654','6869873216','SAGM791025','manuel@example.com','12345'),
+(22,'Olivia','Martínez','Fernández','Calle 987','6643216549','MAFO810717','olivia@example.com','23456'),
+(23,'Ricardo','Hernández','Pérez','Plaza 654','6869873216','HEPR790412','ricardo@example.com','34567'),
+(24,'Valeria','Jiménez','González','Callejón 987','6643216549','JIGV800207','valeria@example.com','45678'),
+(25,'Lorenzo','Gómez','Sánchez','Paseo 654','6869873216','GOSL800609','lorenzo@example.com','56789');
+
+/*Departamentos (Solo ID) */
+
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('1');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('2');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('3');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('4');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('5');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('6');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('7');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('8');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('9');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('10');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('11');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('12');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('13');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('14');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('15');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('16');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('17');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('18');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('19');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('20');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('21');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('22');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('23');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('24');
+INSERT INTO `pepega_autoshop`.`departamento` (`idDepartamento`) VALUES ('25');
+
+/* Nombres de departamentos */
+
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Ventas' WHERE (idDepartamento = '1');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Servicio al Cliente' WHERE (idDepartamento = '2');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Recursos Humanos' WHERE (idDepartamento = '3');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Finanzas' WHERE (idDepartamento = '4');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Almacén' WHERE (idDepartamento = '5');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Marketing' WHERE (idDepartamento = '6');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Taller de Reparación' WHERE (idDepartamento = '7');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Compras' WHERE (idDepartamento = '8');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Desarrollo de Productos' WHERE (idDepartamento = '9');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Logística' WHERE (idDepartamento = '10');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Mantenimiento' WHERE (idDepartamento = '11');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Calidad' WHERE (idDepartamento = '12');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Ingeniería' WHERE (idDepartamento = '13');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Seguridad' WHERE (idDepartamento = '14');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Soporte Técnico' WHERE (idDepartamento = '15');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Investigación y Desarrollo' WHERE (idDepartamento = '16');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Planificación de Producción' WHERE (idDepartamento = '17');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Ventas en Línea' WHERE (idDepartamento = '18');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Comunicación' WHERE (idDepartamento = '19');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Control de Inventario' WHERE (idDepartamento = '20');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Planificación Financiera' WHERE (idDepartamento = '21');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Desarrollo Organizacional' WHERE (idDepartamento = '22');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Asuntos Legales' WHERE (idDepartamento = '23');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Relaciones Públicas' WHERE (idDepartamento = '24');
+UPDATE pepega_autoshop.departamento SET NombreDepartamento = 'Servicio de Posventa' WHERE (idDepartamento = '25');
+
+/* Diagnostico */
+INSERT INTO pepega_autoshop.diagnostico (Descripcion) VALUES
+('El motor presenta un ruido extraño y falta de potencia'),
+('Los frenos están desgastados y producen chirridos al frenar'),
+('Las llantas presentan desgaste irregular y falta de alineación'),
+('La transmisión tiene dificultades para cambiar de marcha'),
+('El aceite del motor muestra signos de contaminación'),
+('La batería no retiene carga adecuadamente'),
+('Se presentan fallos eléctricos en diferentes sistemas del vehículo'),
+('El vehículo experimenta fallas intermitentes y pérdida de potencia'),
+('La suspensión está desgastada y produce ruidos al pasar por baches'),
+('Las llantas presentan desgaste excesivo en los bordes'),
+('Se observan fugas en el sistema de escape'),
+('El filtro de aire está obstruido y requiere reemplazo'),
+('La dirección del vehículo es difícil de maniobrar'),
+('Las bujías están desgastadas y no generan chispa adecuada'),
+('El sistema de frenos muestra desgaste en las pastillas y pérdida de eficiencia'),
+('La correa de distribución está desgastada y presenta grietas'),
+('El sistema de climatización no enfría correctamente'),
+('Los amortiguadores presentan fugas y pérdida de efectividad'),
+('El sistema de dirección asistida tiene dificultades al girar'),
+('El sensor de oxígeno muestra señales irregulares'),
+('La suspensión neumática presenta fugas de aire y no se ajusta correctamente'),
+('El filtro de combustible está obstruido y reduce el flujo de combustible'),
+('El sistema de inyección de combustible presenta fallos y consumo excesivo'),
+('La bomba de agua tiene fugas y debe ser reemplazada'),
+('El sistema de dirección hidráulica presenta pérdida de líquido y dificultades al girar');
+

@@ -68,7 +68,7 @@ CREATE TABLE `diagnostico` (
   `Fecha` date DEFAULT NULL,
   `Descripcion` varchar(255) DEFAULT NULL,
   `Aplicado` tinyint DEFAULT NULL,
-  `Costo` varchar(15) DEFAULT NULL,
+  `Costo` float DEFAULT NULL,
   PRIMARY KEY (`idDiagnostico`),
   KEY `PlacaDiagnostico_idx` (`Placa`),
   CONSTRAINT `PlacaDiagnostico` FOREIGN KEY (`Placa`) REFERENCES `vehiculo` (`Placa`)
@@ -88,7 +88,7 @@ CREATE TABLE `empleado` (
   `Nombre` varchar(15) DEFAULT NULL,
   `Apellido1` varchar(15) DEFAULT NULL,
   `Apellido2` varchar(15) DEFAULT NULL,
-  `Salario` varchar(10) DEFAULT NULL,
+  `Salario` float DEFAULT NULL,
   `idDepartamento` int NOT NULL,
   PRIMARY KEY (`Matricula`,`CURP`),
   KEY `DepartamentoEmp_idx` (`idDepartamento`),
@@ -105,14 +105,14 @@ DROP TABLE IF EXISTS `garantia`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `garantia` (
   `idGarantia` int NOT NULL AUTO_INCREMENT,
-  `idTrabajo` int DEFAULT NULL,
+  `idTrabajoIndividual` int DEFAULT NULL,
   `FechaInicio` date DEFAULT NULL,
   `FechaFin` date DEFAULT NULL,
   `Aplicada` tinyint DEFAULT NULL,
   `Descripcion` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idGarantia`),
-  KEY `TrabajoGarantia_idx` (`idTrabajo`),
-  CONSTRAINT `TrabajoGarantia` FOREIGN KEY (`idTrabajo`) REFERENCES `trabajo` (`idTrabajo`)
+  KEY `TrabajoGarantia_idx` (`idTrabajoIndividual`),
+  CONSTRAINT `TrabajoGarantia` FOREIGN KEY (`idTrabajoIndividual`) REFERENCES `trabajoindividual` (`idTrabajoIndividual`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -128,7 +128,7 @@ CREATE TABLE `historialref` (
   `FechaInicio` date NOT NULL,
   `fechaEliminacion` date DEFAULT NULL,
   `idAutorizador` varchar(20) DEFAULT NULL,
-  `nuevoPrecio` varchar(15) NOT NULL,
+  `nuevoPrecio` float NOT NULL,
   PRIMARY KEY (`idProducto`,`nuevoPrecio`,`FechaInicio`),
   CONSTRAINT `ProductoHistorial` FOREIGN KEY (`idProducto`) REFERENCES `refacciones` (`idProducto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -163,7 +163,7 @@ CREATE TABLE `refacciones` (
   `NombreProducto` varchar(255) DEFAULT NULL,
   `Clase` varchar(70) DEFAULT NULL,
   `Inventario` varchar(5) DEFAULT NULL,
-  `PrecioUnitario` varchar(15) DEFAULT NULL,
+  `PrecioUnitario` float DEFAULT NULL,
   `Descripcion` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idProducto`),
   KEY `Precio` (`PrecioUnitario`)
@@ -201,11 +201,10 @@ CREATE TABLE `trabajoindividual` (
   `idTrabajo` int DEFAULT NULL,
   `idTrabajoIndividual` int NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(255) DEFAULT NULL,
-  `Garantia` int DEFAULT NULL,
   `Fecha` date DEFAULT NULL,
   `idVenta` int DEFAULT NULL,
   `idPromo` int DEFAULT NULL,
-  `Costo` varchar(25) DEFAULT NULL,
+  `Costo` float DEFAULT NULL,
   PRIMARY KEY (`idTrabajoIndividual`),
   KEY `TrabajoTI_idx` (`idTrabajo`),
   KEY `EmpeadoTI_idx` (`idEmpleadoR`),
@@ -251,7 +250,7 @@ CREATE TABLE `venta` (
   `idCliente` int NOT NULL,
   `idVenta` int NOT NULL AUTO_INCREMENT,
   `Fecha` date DEFAULT NULL,
-  `Total` varchar(15) DEFAULT NULL,
+  `Total` float DEFAULT NULL,
   PRIMARY KEY (`idVenta`),
   KEY `ClienteVenta_idx` (`idCliente`),
   CONSTRAINT `ClienteVenta` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`)
@@ -270,13 +269,13 @@ CREATE TABLE `ventaindividual` (
   `idVenta` int NOT NULL,
   `Cantidad` varchar(45) DEFAULT NULL,
   `idPromo` int DEFAULT NULL,
-  `Precio` varchar(15) DEFAULT NULL,
+  `Precio` float DEFAULT NULL,
   PRIMARY KEY (`idProducto`,`idVenta`),
   KEY `ProductoVI_idx` (`idProducto`),
   KEY `VentaVI_idx` (`idVenta`),
   KEY `PromoVI_idx` (`idPromo`),
-  KEY `PrecioUnitarioVI_idx` (`Precio`),
-  CONSTRAINT `PrecioUnitarioVI` FOREIGN KEY (`Precio`) REFERENCES `refacciones` (`PrecioUnitario`),
+  KEY `PrecioVI_idx` (`Precio`),
+  CONSTRAINT `PrecioVI` FOREIGN KEY (`Precio`) REFERENCES `refacciones` (`PrecioUnitario`),
   CONSTRAINT `ProductoVI` FOREIGN KEY (`idProducto`) REFERENCES `refacciones` (`idProducto`),
   CONSTRAINT `PromoVI` FOREIGN KEY (`idPromo`) REFERENCES `promociones` (`idPromo`),
   CONSTRAINT `VentaVI` FOREIGN KEY (`idVenta`) REFERENCES `venta` (`idVenta`)
@@ -292,4 +291,4 @@ CREATE TABLE `ventaindividual` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-30 23:16:31
+-- Dump completed on 2023-06-01  9:40:14
